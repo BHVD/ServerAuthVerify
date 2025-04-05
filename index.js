@@ -7,26 +7,28 @@ app.use(express.json());
 
 app.post('/verify-unity-token', async (req, res) => {
     const accessToken = req.body.access_token;
-    console.log("Received access_token: Succeed");
-    if (!accessToken) {
-        return res.status(400).json({ ResultCode: 0, Message: "Missing access_token" });
+    const playerId = req.body.player_id;
+    console.log("Received: Succeed");
+    if (!accessToken || !playerId) {
+        console.log("Received: Failed");
+        return res.status(400).json({ ResultCode: 0, Message: "Missing Params" });
     }
 
     try {
-        // Gọi Unity API để xác minh token
-        const response = await axios.get('https://services.api.unity.com/identity/v1/tokeninfo', {
+        // Gọi Unity API để lấy thông tin người dùng đồng thời xác thực token
+        const response = await axios.get('https://social.services.api.unity.com/v1/names/'+playerId, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         });
 
-        const userId = response.data.sub; // sub là User ID trong Unity
-        const nickname = "Player_" + userId.slice(-4); // Tùy bạn đặt logic
+        const PlayerName = response.data.name; // sub là User ID trong Unity
+        const nickname = "Player_" + PlayerName.slice(-4); // Tùy bạn đặt logic
 
         // Trả kết quả cho Photon
         return res.json({
             ResultCode: 1,
-            UserId: userId,
+            UserId: playerId,
             NickName: nickname,
             Data: {
                 skin: "blue",
