@@ -18,7 +18,8 @@ app.post('/verify-unity-token', async (req, res) => {
         // Gọi Unity API để lấy thông tin người dùng đồng thời xác thực token
         const response = await axios.get('https://social.services.api.unity.com/v1/names/'+playerId, {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                ProjectId: process.env.PROJECT_ID
             }
         });
 
