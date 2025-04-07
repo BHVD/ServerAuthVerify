@@ -6,8 +6,8 @@ app.use(express.json());
 
 
 app.get('/verify-unity-token', async (req, res) => {
-    const accessToken = req.body.access_token;
-    const playerId = req.body.player_id;
+    const accessToken = req.query.access_token;
+    const playerId = req.query.player_id;
     console.log("Received: Succeed");
     if (!accessToken || !playerId) {
         console.log("Received: Failed");
