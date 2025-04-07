@@ -41,5 +41,8 @@ app.post('/verify-unity-token', async (req, res) => {
         return res.status(401).json({ ResultCode: 0, Message: "Invalid or expired token" });
     }
 });
-
+app.use((req, res) => {
+    console.log("Received unexpected request:", req.method, req.url);
+    res.status(404).json({ message: "Route not found" });
+});
 app.listen(port, () => console.log('Server listening on port', port));
