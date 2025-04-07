@@ -5,7 +5,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 
-app.post('/verify-unity-token', async (req, res) => {
+app.get('/verify-unity-token', async (req, res) => {
     const accessToken = req.body.access_token;
     const playerId = req.body.player_id;
     console.log("Received: Succeed");
@@ -41,8 +41,8 @@ app.post('/verify-unity-token', async (req, res) => {
         return res.status(401).json({ ResultCode: 0, Message: "Invalid or expired token" });
     }
 });
-app.use((req, res) => {
-    console.log("Received unexpected request:", req.method, req.url);
-    res.status(404).json({ message: "Route not found" });
-});
+// app.use((req, res) => {
+//     console.log("Received unexpected request:", req.method, req.url);
+//     res.status(404).json({ message: "Route not found" });
+// });
 app.listen(port, () => console.log('Server listening on port', port));
