@@ -24,7 +24,7 @@ app.get('/verify-unity-token', async (req, res) => {
         });
 
         const PlayerName = response.data.name; // sub là User ID trong Unity
-        const nickname = "Player_" + PlayerName.slice(-4); // Tùy bạn đặt logic
+        const nickname = PlayerName; // Tùy bạn đặt logic
 
         // Trả kết quả cho Photon
         return res.json({
