@@ -4,7 +4,6 @@ const { GetServerEpochTime, signWithHMAC, verifyHMAC } = require('./ServerInterv
 const port = process.env.PORT || 4000;
 const app = express();
 app.use(express.json());
-require('dotenv').config()
 ///verify auth
 app.get('/verify-unity-token', async (req, res) => {
     const accessToken = req.query.access_token;
@@ -95,8 +94,6 @@ app.post('/init-new-match', async (req, res) => {
         }
     });
 });
-
-
 
 /// reward 
 app.post('/reward', async (req, res) => {
