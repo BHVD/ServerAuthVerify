@@ -44,7 +44,7 @@ app.get('/verify-unity-token', async (req, res) => {
 });
 
 /// save match info and generate secret key
-app.post('/initNewMatch', async (req, res) => {
+app.post('/init-new-match', async (req, res) => {
     const accessToken = req.headers.authorization; // Lấy access token từ header Authorization
     const matchId = req.body.match_id;
     const playerId = req.body.player_id;
@@ -99,7 +99,7 @@ app.post('/initNewMatch', async (req, res) => {
 
 
 /// reward 
-app.post('/Reward', async (req, res) => {
+app.post('/reward', async (req, res) => {
     const accessToken = req.headers.authorization; // Lấy access token từ header Authorization
     const playerId = req.body.player_id;
     const Rewrads = req.body.rewards;
@@ -138,7 +138,7 @@ app.post('/Reward', async (req, res) => {
             return res.status(400).json({ResultCode:0 , Message: "Player don't have Match"})
         }
         const secret = await signWithHMAC(`${instance.MatchInfo.matchId}${instance.MatchInfo.startTimestamp}`, process.env.SECRET_KEY);
-        
+
         const results ={}// bindding///////////////
 
         var message = ""
