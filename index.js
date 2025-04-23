@@ -162,7 +162,7 @@ app.post('/reward', async (req, res) => {
         //update XP
         if (Rewrads.XP) {
             instance.CurrentXp += Rewrads.XP
-            var playerXPNeededKey = `LEVEL_UP_NEEDED_1`
+            var playerXPNeededKey = `LEVEL_UP_NEEDED_${instance.level}`
             
             try {
                 const response = await axios.get(
