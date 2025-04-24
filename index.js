@@ -187,7 +187,7 @@ app.post('/reward', async (req, res) => {
                 return res.status(error.status).json({ResultCode: 0, Message:"Fail to get level up xp needed!"})
             }
 
-            const shouldPlayerLevelUp = instance.CurrentXp > instance.xpNeedLevelUp
+            const shouldPlayerLevelUp = instance.CurrentXp >= instance.xpNeedLevelUp
 
             const Data = []
 
