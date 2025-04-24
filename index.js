@@ -31,7 +31,7 @@ app.get('/verify-unity-token', async (req, res) => {
                 `https://cloud-save.services.api.unity.com/v1/data/projects/${process.env.PROJECT_ID}/players/${playerId}/public/items?${listKey}`,
                 {
                     headers: {
-                        Authorization: accessToken,
+                        Authorization: `Bearer ${accessToken}`,
                         contentType: 'application/json'
                     }
                 }
